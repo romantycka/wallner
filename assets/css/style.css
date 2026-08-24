@@ -300,7 +300,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.
 
 /* ---------- sections ---------- */
 
-.section { padding: clamp(3.5rem, 9vh, 6.5rem) 0; }
+.section { padding: clamp(3.5rem, 9vh, 6.5rem) 0; background: var(--cream); }
 .section--blush { background: linear-gradient(180deg, var(--blush) 0%, var(--cream-2) 100%); }
 .section--cream2 { background: var(--cream-2); }
 .section--dark { background: var(--dark); color: var(--cream); }
@@ -767,6 +767,21 @@ form { display: grid; gap: 1rem; }
 .legal-text h2 { font-size: 1.5rem; margin: 2.2rem 0 0.8rem; }
 .legal-text p + p { margin-top: 1rem; }
 .legal-text a { word-break: break-all; }
+
+/* ---------- curtain reveal (sekce se nasouvá přes připnutou hlavičku) ---------- */
+
+.page-hero { position: sticky; top: 0; }
+.hero ~ *, .page-hero ~ * { position: relative; }
+.hero + *, .page-hero + * {
+  border-radius: 28px 28px 0 0;
+  margin-top: -26px;
+  box-shadow: 0 -16px 42px -22px rgba(42, 33, 28, 0.45);
+  overflow: hidden;
+}
+
+@media (min-width: 981px) {
+  .hero { position: sticky; top: 0; }
+}
 
 /* ---------- reveal animations ---------- */
 
