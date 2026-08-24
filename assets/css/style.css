@@ -767,6 +767,13 @@ form { display: grid; gap: 1rem; }
 
 main > * { position: relative; }
 .is-pinned { position: sticky; top: 0; }
+main > .section.is-stack {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 main > .section, .site-footer {
   border-radius: 28px 28px 0 0;
   margin-top: -26px;

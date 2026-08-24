@@ -135,20 +135,46 @@
   }
 
   /* ---------- curtain reveal ----------
-     připne sekce, které se vejdou do viewportu; další obsah se přes ně nasouvá */
+     připne sekce, které se vejdou do viewportu; další obsah se přes ně nasouvá.
+     Jakmile je sekce plně překrytá následující sekcí, odepne se, aby
+     nevykukovala pod kratšími sekcemi dál na stránce. */
   var stackables = Array.prototype.slice.call(
     document.querySelectorAll(".hero, .page-hero, main > .section")
   );
   var updatePins = function () {
     var vh = window.innerHeight;
     stackables.forEach(function (s) {
-      s.classList.toggle("is-pinned", s.offsetHeight <= vh);
+      var fits = s.offsetHeight <= vh + 1;
+      var next = s.nextElementSibling;
+      var covered = next ? next.getBoundingClientRect().top <= 0 : false;
+      s.classList.toggle("is-pinned", fits && !covered);
     });
   };
-  if (stackables.length) {
+  var applyStack = function () {
+    var vh = window.innerHeight;
+    stackables.forEach(function (s) {
+      if (s.classList.contains("section")) {
+        s.classList.remove("is-stack");
+        s.classList.toggle("is-stack", s.offsetHeight <= vh);
+      }
+    });
     updatePins();
-    window.addEventListener("load", updatePins);
-    window.addEventListener("resize", updatePins, { passive: true });
+  };
+  if (stackables.length) {
+    var pinTicking = false;
+    var onPinScroll = function () {
+      if (!pinTicking) {
+        pinTicking = true;
+        window.requestAnimationFrame(function () {
+          pinTicking = false;
+          updatePins();
+        });
+      }
+    };
+    applyStack();
+    window.addEventListener("load", applyStack);
+    window.addEventListener("resize", applyStack, { passive: true });
+    window.addEventListener("scroll", onPinScroll, { passive: true });
   }
 
   /* ---------- tlačítko nahoru ---------- */
