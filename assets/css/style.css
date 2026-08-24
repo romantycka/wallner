@@ -736,15 +736,6 @@ form { display: grid; gap: 1rem; }
 
 /* ---------- misc ---------- */
 
-.divider-hearts {
-  height: 60px;
-  background-image: radial-gradient(circle, var(--blush-deep) 2.4px, transparent 2.6px);
-  background-size: 26px 26px;
-  opacity: 0.5;
-  mask-image: linear-gradient(180deg, black, transparent);
-  -webkit-mask-image: linear-gradient(180deg, black, transparent);
-}
-
 .to-top {
   position: fixed;
   right: 1.4rem;
@@ -771,20 +762,17 @@ form { display: grid; gap: 1rem; }
 .legal-text p + p { margin-top: 1rem; }
 .legal-text a { word-break: break-all; }
 
-/* ---------- curtain reveal (sekce se nasouvá přes připnutou hlavičku) ---------- */
+/* ---------- curtain reveal (sekce se nasouvají přes sebe) ----------
+   .is-pinned přiděluje JS jen sekcím, které se vejdou do viewportu */
 
-.page-hero { position: sticky; top: 0; }
-.hero ~ *, .page-hero ~ * { position: relative; }
-.hero + *, .page-hero + * {
+main > * { position: relative; }
+.is-pinned { position: sticky; top: 0; }
+main > .section, .site-footer {
   border-radius: 28px 28px 0 0;
   margin-top: -26px;
   box-shadow: 0 -16px 42px -22px rgba(42, 33, 28, 0.45);
-  overflow: hidden;
 }
-
-@media (min-width: 981px) {
-  .hero { position: sticky; top: 0; }
-}
+.site-footer { position: relative; }
 
 /* ---------- reveal animations ---------- */
 

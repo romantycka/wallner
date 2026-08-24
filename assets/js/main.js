@@ -134,6 +134,23 @@
     updateParallax();
   }
 
+  /* ---------- curtain reveal ----------
+     připne sekce, které se vejdou do viewportu; další obsah se přes ně nasouvá */
+  var stackables = Array.prototype.slice.call(
+    document.querySelectorAll(".hero, .page-hero, main > .section")
+  );
+  var updatePins = function () {
+    var vh = window.innerHeight;
+    stackables.forEach(function (s) {
+      s.classList.toggle("is-pinned", s.offsetHeight <= vh);
+    });
+  };
+  if (stackables.length) {
+    updatePins();
+    window.addEventListener("load", updatePins);
+    window.addEventListener("resize", updatePins, { passive: true });
+  }
+
   /* ---------- tlačítko nahoru ---------- */
   var toTop = document.querySelector(".to-top");
   if (toTop) {
