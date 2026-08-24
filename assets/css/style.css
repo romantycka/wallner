@@ -566,6 +566,9 @@ form { display: grid; gap: 1rem; }
 
 .page-hero {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(58vh, 520px);
   padding: clamp(3rem, 8vh, 5.5rem) 0;
   background:
     radial-gradient(55% 90% at 90% 10%, rgba(228, 196, 180, 0.5), transparent 70%),
