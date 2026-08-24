@@ -188,6 +188,40 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.
 }
 .burger span { width: 26px; height: 2px; background: var(--ink); transition: 0.3s; }
 
+/* ---------- parallax sections ---------- */
+
+.pxs { position: relative; overflow: hidden; }
+.pxs__img {
+  position: absolute;
+  left: 0;
+  top: -14%;
+  width: 100%;
+  height: 128%;
+  object-fit: cover;
+  z-index: 0;
+  will-change: transform;
+  pointer-events: none;
+}
+.pxs__veil { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.pxs__veil--hero {
+  background:
+    linear-gradient(180deg, rgba(250, 245, 239, 0.55) 0%, rgba(250, 245, 239, 0.2) 45%, var(--cream) 100%),
+    linear-gradient(90deg, rgba(250, 245, 239, 0.9) 0%, rgba(250, 245, 239, 0.55) 52%, rgba(250, 245, 239, 0.15) 100%);
+}
+.pxs__veil--blush {
+  background: linear-gradient(180deg, rgba(240, 220, 210, 0.8) 0%, rgba(243, 234, 224, 0.74) 100%);
+}
+.pxs__veil--dark {
+  background: linear-gradient(180deg, rgba(30, 21, 17, 0.88) 0%, rgba(36, 27, 23, 0.82) 100%);
+}
+.pxs__veil--wine {
+  background: linear-gradient(180deg, rgba(88, 14, 10, 0.72) 0%, rgba(46, 11, 9, 0.88) 100%);
+}
+.pxs__veil--cream {
+  background: linear-gradient(90deg, rgba(243, 234, 224, 0.92) 0%, rgba(243, 234, 224, 0.55) 100%);
+}
+.pxs > .container { position: relative; z-index: 2; }
+
 /* ---------- hero (home) ---------- */
 
 .hero {

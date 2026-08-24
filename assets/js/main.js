@@ -107,6 +107,33 @@
     });
   });
 
+  /* ---------- parallax pozadí ----------
+     <section class="pxs"><img class="pxs__img" ...> — posun podle scrollu */
+  var pxImgs = Array.prototype.slice.call(document.querySelectorAll(".pxs__img"));
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (pxImgs.length && !reducedMotion) {
+    var ticking = false;
+    var updateParallax = function () {
+      ticking = false;
+      var vh = window.innerHeight;
+      pxImgs.forEach(function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var progress = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
+        img.style.transform = "translateY(" + (progress * r.height * -0.22).toFixed(1) + "px)";
+      });
+    };
+    var onScroll = function () {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateParallax);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateParallax();
+  }
+
   /* ---------- tlačítko nahoru ---------- */
   var toTop = document.querySelector(".to-top");
   if (toTop) {
