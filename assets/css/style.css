@@ -220,7 +220,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.
 .pxs__veil--cream {
   background: linear-gradient(90deg, rgba(243, 234, 224, 0.92) 0%, rgba(243, 234, 224, 0.55) 100%);
 }
-.pxs > .container { position: relative; z-index: 2; }
+.pxs__veil--light {
+  background: rgba(250, 245, 239, 0.88);
+}
+.pxs > .container, .pxs > .container--narrow { position: relative; z-index: 2; }
 
 /* ---------- hero (home) ---------- */
 
